@@ -9,6 +9,8 @@
  
    // 技记 矫累 !
    session_start();
+ 
+	echo "test input";
 
    // 孽府巩 积己
    $sql = "select id from USER_TABLE";
