@@ -1,6 +1,6 @@
 <?
     // 데이터베이스 접속 문자열. (db위치, 유저 이름, 비밀번호)
-    $connect=mysql_connect( "localhost", "camcu", "camcu12@") or  
+    $connect=mysql_connect( "localhost", "ID", "PW") or  
         die( "SQL server에 연결할 수 없습니다.");
 
     mysql_query("SET NAMES UTF8");
