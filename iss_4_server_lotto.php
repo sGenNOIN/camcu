@@ -10,36 +10,26 @@
 	// 세션 시작 !
 	session_start();
 
-	//진입 테스트
-//	echo "in iss_4_server_lotto.php\r";
-	
-	//get방식으로 전송된 데이터를 받는다.
+	//POST방식으로 전송된 데이터를 받는다. 
 	//$beacon_uuid = $_POST["beacon_uuid"];
 	$beacon_uuid = "aaaa";
 
-//	echo " 비콘 값 : $beacon_uuid\r";
-
 	// 쿼리문 생성 - 비콘 UUID와 일치하는 음식점의 이름을 검색하는 쿼리
-	//$sql_shop_name = "select shop_name from SHOP_TABLE where shop_beacon_device_number =.'$beacon_uuid'.";
 	$sql_shop_name = "select shop_name from SHOP_TABLE where shop_beacon_device_number = '".$beacon_uuid."'";
 
 	// 쿼리문을 수행하여 DB에서 찾아낸 shop_name 찾아낸다. 이후 변수에 결과값을 저장
 	$result_shop_name = mysql_query($sql_shop_name, $connect);
 	$shop_name = mysql_result($result_shop_name,0);
 
-//	echo " 출력 결과 : $shop_name\r";
-
+	//
 	$sql_coupon_name = "select coupon_name from COUPON_TABLE where shop_name = '".$shop_name."'";
-
 	$result_coupon_name = mysql_query($sql_coupon_name, $connect);
-
 	$total_record_coupon_name = mysql_num_rows($result_coupon_name);
 
-	//랜덤값 생성
+	//rand()함수를 이용하여 랜덤값 생성. 0~4999 생성.
 	$random_val = rand() % 5000 ;
 
-//	echo "random : $random_val\r";
-
+	//배열 생성
 	$row_array = array( " " );
 
 	for ($i=0; $i < $total_record_coupon_name; $i++)                    
@@ -49,61 +39,26 @@
         
 		$row = mysql_fetch_array($result_coupon_name);
 		
+		//현재 &row에 저장되어 있는 
 		array_push($row_array, $row[coupon_name]);
 	}
-		//print_4($row);
-//		echo "show \n";
-//		print_r($row_array["2"]);
-
-
-
+	
+	//랜덤 함수를 이용하여 생성된 랜덤값에 따라 쿠폰 출력을 달리한다.
 	if($random_val >= 0 && $random_val <= 50)
 	{
-//		echo "in 1";
 		echo "{\"coupon_name\":$row_array[1]\"}";
-/*
-		$sql_coupon_name = "select coupon_name from COUPON_TABLE where shop_name = '".$shop_name."'";
-
-		$result_coupon_name = mysql_query($sql_coupon_name, $connect);
-
-		$total_record_coupon_name = mysql_num_rows($result_coupon_name);
-*/
 	}
 	else if($random_val >= 51 && $random_val <= 500)
 	{
-//		echo "in 2";
 		echo "{\"coupon_name\":$row_array[2]\"}";
-/*
-		$sql_coupon_name = "select coupon_name from COUPON_TABLE where shop_name = '".$shop_name."'";
-
-		$result_coupon_name = mysql_query($sql_coupon_name, $connect);
-
-		$total_record_coupon_name = mysql_num_rows($result_coupon_name);
-*/
 	}
 	else if($random_val >= 501 && $random_val <= 2000)
 	{
-//		echo "in 3";
 		echo "{\"coupon_name\":$row_array[3]\"}";
-/*
-		$sql_coupon_name = "select coupon_name from COUPON_TABLE where shop_name = '".$shop_name."'";
-
-		$result_coupon_name = mysql_query($sql_coupon_name, $connect);
-
-		$total_record_coupon_name = mysql_num_rows($result_coupon_name);
-*/
 	}
 	else if($random_val >= 2001 && $random_val <= 5000)
 	{
-//		echo "in 4";
 		echo "{\"coupon_name\":$row_array[4]\"}";
-/*
-		$sql_coupon_name = "select coupon_name from COUPON_TABLE where shop_name = '".$shop_name."'";
-
-		$result_coupon_name = mysql_query($sql_coupon_name, $connect);
-
-		$total_record_coupon_name = mysql_num_rows($result_coupon_name);
-*/
 	}
 
 ?>
