@@ -1,6 +1,9 @@
 <?
+	//예제코드
+	//PHP-DB연결, SQL문 전송-수신, JSONArray 형식으로 변환, JSONArray 형식 탐색, JSONArray 형식 출력
+
     // 데이터베이스 접속 문자열. (db위치, 유저 이름, 비밀번호)
-    $connect=mysql_connect( "localhost", "ID", "PW") or  
+    $connect=mysql_connect( "localhost", "camcu", "camcu12@") or  
         die( "SQL server에 연결할 수 없습니다.");
 
     mysql_query("SET NAMES UTF8");
@@ -10,7 +13,7 @@
    // 세션 시작 !
    session_start();
 
-   // 쿼리문 생성
+   //쿼리문 : USER_TABLE에 있는 id를 모두 갖고와라
    $sql = "select id from USER_TABLE";
  
    // 쿼리 실행 결과를 $result에 저장
