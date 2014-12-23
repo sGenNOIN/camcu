@@ -1,6 +1,6 @@
 	<?
     // 데이터베이스 접속 문자열. (db위치, 유저 이름, 비밀번호)
-    $connect=mysql_connect( "localhost", "ID", "PW") or  
+    $connect=mysql_connect( "localhost", "camcu", "camcu12@") or  
         die( "SQL server에 연결할 수 없습니다.");
 
     mysql_query("SET NAMES UTF8");
@@ -30,7 +30,7 @@
 	$random_val = rand() % 5000 ;
 
 	//배열 생성
-	$row_array = array( " " );
+	$row_array = array();
 
 	for ($i=0; $i < $total_record_coupon_name; $i++)                    
 	{
@@ -42,8 +42,14 @@
 		//현재 &row에 저장되어 있는 
 		array_push($row_array, $row[coupon_name]);
 	}
-
-
+	$cnt = count($row_array);
+	echo $cnt;
+	$random_val = rand()%$cnt;
+	print_r($row_array);
+	echo $random_val;
+	echo '{"coupon_name":'.$row_array[$random_val].'}'
+	/*
+	//랜덤 함수를 이용하여 생성된 랜덤값에 따라 쿠폰 출력을 달리한다.
 	if($random_val >= 0 && $random_val <= 50)
 	{
 		echo "{\"coupon_name\":$row_array[1]\"}";
@@ -60,5 +66,5 @@
 	{
 		echo "{\"coupon_name\":$row_array[4]\"}";
 	}
-
+	*/
 ?>
