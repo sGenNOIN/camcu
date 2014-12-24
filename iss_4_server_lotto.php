@@ -49,6 +49,8 @@
 	//총 배열의 수
 	$cnt = count($row_array);
 
+	//쿠폰의 개수에 따라서 쿠폰선택 방식을 달리 한다.
+	//최소 3개로 정해놓았으며, 3등 이후의 상품들은 전부 동일한 확률로 뽑히도록한다.
 	if($cnt == 3)
 	{
 		if($random_val >= 0 && $random_val <= 50)
@@ -64,7 +66,6 @@
 			echo '{"coupon_name":'.$row_array[2].'}';
 		}
 	}
-	
 	else if($cnt > 3)
 	{
 		if($random_val >= 0 && $random_val <= 50)

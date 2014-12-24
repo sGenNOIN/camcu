@@ -67,8 +67,6 @@
 	
 	else if($cnt > 3)
 	{
-		echo $cnt;
-		print_r($row_array);
 		if($random_val >= 0 && $random_val <= 50)
 		{
 			echo '{"coupon_name":'.$row_array[0].'}';
